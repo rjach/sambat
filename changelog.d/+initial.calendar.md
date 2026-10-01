@@ -1,0 +1,1 @@
+The calendar table covers BS 1975–2083. BS 2082 and 2083 are verified against the national panchang of the Nepal Panchanga Nirnayak Bikas Samiti, and BS 2081 against the Surya Panchanga; the other years are cross-checked against open-source tables.

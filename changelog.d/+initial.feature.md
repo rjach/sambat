@@ -1,0 +1,1 @@
+First release: `sambat.date` and `sambat.datetime` with full `datetime` parity, the `sambat.calendar` module, Nepali formatting and parsing, BS month arithmetic (`sambat.delta`), periods, Nepal's fiscal year, and the `sambat` command line tool.
