@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use sambat in research, please cite it as below."
+title: "sambat: exact Bikram Sambat (Nepali calendar) dates with the full datetime API"
+type: software
+authors:
+  - given-names: Rojan
+    family-names: Acharya
+repository-code: "https://github.com/rjach/sambat"
+url: "https://rjach.github.io/sambat/"
+license: Apache-2.0
+keywords:
+  - Bikram Sambat
+  - Vikram Samvat
+  - Nepali calendar
+  - datetime
+  - Python
