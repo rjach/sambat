@@ -28,6 +28,8 @@ _NOON = 12
 
 
 class _DateLike(Protocol):
+    """The part of the ``sambat.date`` interface that formatting needs."""
+
     @property
     def year(self) -> int: ...
     @property

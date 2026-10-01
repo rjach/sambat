@@ -98,7 +98,10 @@ def test_fiscal_year_basics() -> None:
     assert FiscalYear.of(date(2083, 3, 32)) == FiscalYear(2082)
     assert repr(fy) == "FiscalYear(2083)"
     assert fy.next() == FiscalYear(2084)
-    assert fy.prev() < fy
+    assert fy.prev() < fy <= FiscalYear(2083)
+    assert fy > fy.prev()
+    with pytest.raises(TypeError):
+        _ = fy < 2083  # type: ignore[operator]
     assert {fy, FiscalYear(2083)} == {fy}
     assert fy != 2083
 

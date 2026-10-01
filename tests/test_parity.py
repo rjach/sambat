@@ -68,7 +68,10 @@ def test_class_surface(stdlib_cls: type, sambat_cls: type) -> None:
 
 
 def test_module_surface() -> None:
-    names = {name for name in dir(dt) if not name.startswith("_")} - MODULE_EXCLUSIONS
+    # __all__ is the documented API; dir() also lists implementation details
+    # such as PyPy's cffi interop helpers.
+    public = getattr(dt, "__all__", [name for name in dir(dt) if not name.startswith("_")])
+    names = set(public) - MODULE_EXCLUSIONS
     missing = {name for name in names if not hasattr(sambat, name)}
     assert not missing, f"sambat lacks {sorted(missing)}"
 

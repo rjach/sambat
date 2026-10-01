@@ -19,7 +19,7 @@ from sambat._date import date
 from sambat._datetime import datetime
 from sambat.delta import diff
 from sambat.fiscal import FiscalYear
-from sambat.locale import Locale, get_locale
+from sambat.locale import EN, Locale, get_locale
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
@@ -185,13 +185,18 @@ def _cmd_range(options: argparse.Namespace) -> int:
     return 0
 
 
+def _locale_argument(name: str) -> Locale:
+    try:
+        return get_locale(name)
+    except LookupError as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from None
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Return the argument parser for the ``sambat`` command."""
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument("--json", action="store_true", help="print JSON")
-    common.add_argument(
-        "--locale", type=get_locale, default=get_locale("en"), help="en (default) or ne"
-    )
+    common.add_argument("--locale", type=_locale_argument, default=EN, help="en (default) or ne")
 
     parser = argparse.ArgumentParser(
         prog="sambat", description="Bikram Sambat (Nepali calendar) dates on the command line."

@@ -140,8 +140,8 @@ def test_replace() -> None:
 
 def test_comparisons() -> None:
     a, b = date(2083, 1, 1), date(2083, 1, 2)
-    assert a < b <= b
-    assert b > a >= a
+    assert a < b <= date(2083, 1, 2)
+    assert b > a >= date(2083, 1, 1)
     assert a != b
     assert a == date(2083, 1, 1)
 

@@ -222,6 +222,14 @@ class MonthPeriod(Period):
             return MonthPeriod(self.year - 1, _MONTHS)
         return MonthPeriod(self.year, self.month - 1)
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, MonthPeriod):
+            return NotImplemented
+        return (self.year, self.month) == (other.year, other.month)
+
+    def __hash__(self) -> int:
+        return hash((self.year, self.month))
+
     def __repr__(self) -> str:
         return f"MonthPeriod({self.year}, {self.month})"
 
@@ -258,6 +266,14 @@ class YearPeriod(Period):
     def prev(self) -> YearPeriod:
         """Return the preceding year."""
         return YearPeriod(self.year - 1)
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, YearPeriod):
+            return NotImplemented
+        return self.year == other.year
+
+    def __hash__(self) -> int:
+        return hash(self.year)
 
     def __repr__(self) -> str:
         return f"YearPeriod({self.year})"

@@ -30,6 +30,7 @@ Examples:
 from __future__ import annotations
 
 import datetime as _dt
+import functools
 import re
 from typing import TYPE_CHECKING, Self
 
@@ -49,6 +50,7 @@ _MONTHS = 12
 _LABEL = re.compile(r"^\s*(\d{4})\s*[/\-]\s*(\d{2}|\d{4})\s*$")
 
 
+@functools.total_ordering
 class FiscalYear:
     """A fiscal year identified by the BS year in which it starts.
 

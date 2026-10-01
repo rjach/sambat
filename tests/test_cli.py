@@ -74,6 +74,13 @@ def test_fy(capsys: pytest.CaptureFixture[str]) -> None:
     assert status == 0
 
 
+def test_invalid_locale_is_a_usage_error(capsys: pytest.CaptureFixture[str]) -> None:
+    with pytest.raises(SystemExit) as excinfo:
+        main(["today", "--locale", "fr"])
+    assert excinfo.value.code == 2
+    assert "unknown locale" in capsys.readouterr().err
+
+
 def test_diff_and_range(capsys: pytest.CaptureFixture[str]) -> None:
     status, out, _ = run(capsys, "diff", "2056-04-12", "2083-06-15")
     assert status == 0
