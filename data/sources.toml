@@ -1,0 +1,204 @@
+# Sources for data/calendar.csv.
+#
+# `[[source]]` entries are referenced by id from the `sources` column of
+# calendar.csv. `[[dataset]]` entries list the open-source tables that make up
+# the "open-datasets" cross-check. Month lengths are facts; the repository
+# stores citations and checksums, never copies of the original documents.
+
+[[source]]
+id = "npns-panchang-2083"
+title = "राष्ट्रिय पञ्चाङ्ग वि.सं. २०८३ (National Panchanga BS 2083)"
+publisher = "Nepal Panchanga Nirnayak Bikas Samiti, Government of Nepal"
+kind = "primary"
+bs_years = [2083]
+url = "https://giwmscdnone.gov.np/media/pages/files/FORMAT-2083-A_7f75xmb.pdf"
+listing = "https://npns.gov.np"
+retrieved = "2026-10-01"
+sha256 = "e7615a149018edd41e6239f7d0ed0c513f94e0566277dca7af41347c62713bde"
+checked = "Every month boundary (गते reset) and the Baisakh 1 weekday (Tuesday) read from the day columns."
+
+[[source]]
+id = "npns-panchang-2082"
+title = "राष्ट्रिय पञ्चाङ्ग वि.सं. २०८२ (National Panchanga BS 2082)"
+publisher = "Nepal Panchanga Nirnayak Bikas Samiti, Government of Nepal"
+kind = "primary"
+bs_years = [2082]
+url = "https://giwmscdnone.gov.np/media/pages/files/npnbs_2082_ussfian.pdf"
+listing = "https://npns.gov.np"
+retrieved = "2026-10-01"
+sha256 = "e0b9aad80b85a8863daba0b5cc20150dca483df90365fc6d93cdafcdd3dd2848"
+checked = "Every month boundary (गते reset) and the Baisakh 1 weekday (Monday) read from the day columns."
+
+[[source]]
+id = "surya-panchanga-2081"
+title = "सूर्य पञ्चाङ्ग वि.सं. २०८१ (Surya Panchanga BS 2081)"
+publisher = "Surya Panchanga (published almanac), archived by the Internet Archive"
+kind = "primary"
+bs_years = [2081]
+url = "https://archive.org/download/Nepali-panchanga-2081-vs/Surya%20Panchanga%202081%20VS.pdf"
+listing = "https://archive.org/details/Nepali-panchanga-2081-vs"
+retrieved = "2026-10-01"
+sha256 = "d926b2571a5f32bf6eed4b0856f9bd058d89177b6b44b4e5e78946c46e5758be"
+checked = "Every month boundary read from the day (गते) and Gregorian date (ता.) columns; Baisakh 1 is Saturday 13 April 2024."
+
+[[source]]
+id = "open-datasets"
+title = "Cross-check of open-source Bikram Sambat month-length tables"
+publisher = "Various (see [[dataset]] entries)"
+kind = "secondary"
+retrieved = "2026-10-01"
+checked = "A row is `consensus` when at least five tables cover the year and at most one disagrees."
+
+[[dataset]]
+repository = "https://github.com/AagitoEx/nepdate"
+commit = "163adfaadadca468ccdf7e4c5c3005c1d04eefc8"
+path = "src/main/java/io/github/aagitoex/nepdate/Constants.java"
+bs_years = [1976, 2099]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/anuzpandey/laravel-nepali-date"
+commit = "026c7ceda53a8f482c5e22c162f54677d3c71c1a"
+path = "src/Constants/NepaliDate.php"
+bs_years = [2000, 2099]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/arneec/nepali-date"
+commit = "83bb3b2ea62359dd0a63cce68553bcebf94e1ebc"
+path = "nepali_datetime/data/calendar_bs.csv"
+bs_years = [1975, 2100]
+license = "Apache-2.0"
+
+[[dataset]]
+repository = "https://github.com/askbuddie/bikram-sambat"
+commit = "d3475606084141352d3bf4472c80f9051968551a"
+path = "src/data/days-in-month-mapping.ts"
+bs_years = [1975, 2100]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/bahadurbaniya/Date-Converter-Bikram-Sambat-to-English-Date"
+commit = "21ff3007f87d2f746570df6a96ebd91bb7643bee"
+path = "src/main/java/np/com/bahadur/converter/date/nepali/Lookup.java"
+bs_years = [1970, 2100]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/ernilambar/nepali-date"
+commit = "d694aba3329b4e27584f16073c4e88070ebd1eab"
+path = "src/NepaliCalendar.php"
+bs_years = [2000, 2090]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/keyrunHORNET/date_picker_converter"
+commit = "4ea9db287a1d48f3ad77c4f417d387b1fb6044af"
+path = "library/src/main/java/com/hornet/dateconverter/DateConverter.java"
+bs_years = [2091, 2100]
+license = "Apache-2.0"
+
+[[dataset]]
+repository = "https://github.com/lalusaud/nepali_calendar"
+commit = "8a7dbedc23628ee3d88585dce1f18ff142cd12a2"
+path = "lib/nepali_calendar/bs.txt"
+bs_years = [2000, 2090]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/medic/bikram-sambat"
+commit = "aeaa7b88332384bddeea98c2445308d437966641"
+path = "test-data/daysInMonth.json"
+bs_years = [1970, 2090]
+license = "Apache-2.0"
+
+[[dataset]]
+repository = "https://github.com/nepalicalendar/nepalicalendar-py"
+commit = "a589c28b8e085049f30a7287753476b59eca6f50"
+path = "nepalicalendar/values.py"
+bs_years = [2000, 2090]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/NobelzSushank/nepali-date-converter"
+commit = "9954db1da97e489e3dd4fe6ed6498ea1bce7adde"
+path = "resources/data/bsad.json"
+bs_years = [2000, 2099]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/PoskOfficial/Miti"
+commit = "111724c872bf89bff1060a9300165e08829ad8ab"
+path = "apps/vite/src/constants/nepaliDateData.ts"
+bs_years = [2000, 2090]
+license = "NOASSERTION"
+
+[[dataset]]
+repository = "https://github.com/przbadu/nepali_date_converter"
+commit = "4136935b1920b802728c38b377e8d53c29873649"
+path = "lib/nepali_date_converter/calendar.rb"
+bs_years = [2000, 2090]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/przbadu/NepaliDateConverter.Net"
+commit = "ad8afd94e1969c7461a8ec02149b2a725a2996f0"
+path = "NepaliDateConverter.Net/Calendar.cs"
+bs_years = [2000, 2090]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/remotemerge/nepali-date-converter"
+commit = "42bfebdb75e78a9a5117ef61a0306efaac6368d1"
+path = "html/src/years.ts"
+bs_years = [1975, 2062]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/samit22/calendarN"
+commit = "8763fe6bc55cbeb29c345a404ba83e7f490d6ea8"
+path = "dateconv/const.go"
+bs_years = [2000, 2090]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/sbmdkl/nepali-date-converter"
+commit = "143121857b31822ddbc8bf50cdd918b79e267a96"
+path = "src/config.ts"
+bs_years = [1978, 2099]
+license = "NOASSERTION"
+
+[[dataset]]
+repository = "https://github.com/sharingapples/nepali-date"
+commit = "d3195488d3c2c9e00c77116b1716440debcb5bb2"
+path = "src/config.js"
+bs_years = [2000, 2088]
+license = "NOASSERTION"
+
+[[dataset]]
+repository = "https://github.com/srishanbhattarai/nepcal"
+commit = "c8e1dbc9e3d2f32610379bf3f668eb65f0c3d308"
+path = "nepcal/constants.go"
+bs_years = [1976, 2099]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/subeshb1/Nepali-Date"
+commit = "2183c30ada24a7fe678a24d58a5aa61ce8cdfa85"
+path = "src/date-config.ts"
+bs_years = [2000, 2090]
+license = "MIT"
+
+[[dataset]]
+repository = "https://github.com/techgaun/ad-bs-converter"
+commit = "fd76e5a583d87ca131d27b4b22b738aebc47693b"
+path = "src/converter.js"
+bs_years = [1975, 2199]
+license = "NOASSERTION"
+
+[[dataset]]
+repository = "https://github.com/techgaun/ad-bs-converter.py"
+commit = "fce70b747deb03c8e0d99f34d8d3f4e87e8b7ace"
+path = "adbs/core.py"
+bs_years = [1978, 2092]
+license = "Apache-2.0"
