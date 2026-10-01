@@ -2,7 +2,22 @@
 
 from __future__ import annotations
 
+import urllib.error
+import urllib.request
+
 import sambat
+
+PYTHON_DOCS = "https://docs.python.org/3"
+
+
+def _reachable(url: str) -> bool:
+    """Return whether an intersphinx inventory can be downloaded right now."""
+    try:
+        with urllib.request.urlopen(f"{url}/objects.inv", timeout=15) as response:  # noqa: S310
+            return bool(response.status == 200)
+    except (OSError, urllib.error.URLError):
+        return False
+
 
 project = "sambat"
 author = "Rojan Acharya and the sambat contributors"
@@ -34,7 +49,9 @@ autodoc_default_options = {"members": True, "show-inheritance": True}
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
 
-intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
+# Links to the Python documentation degrade to plain text (instead of failing
+# the strict build) while docs.python.org is unreachable.
+intersphinx_mapping = {"python": (PYTHON_DOCS, None)} if _reachable(PYTHON_DOCS) else {}
 
 html_theme = "furo"
 html_title = "sambat"
