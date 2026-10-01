@@ -1,0 +1,48 @@
+name: Bug report
+description: Something in sambat does not behave as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! If a BS ↔ AD conversion disagrees with a published
+        calendar, please use the **Calendar discrepancy** form instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: The smallest code that shows the problem, with its output.
+      render: python
+      placeholder: |
+        import sambat
+        print(sambat.date(2083, 6, 15).strftime("%A"))
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What did you expect? For behaviour that mirrors `datetime`, what does the standard library do?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: sambat version
+      placeholder: python -c "import sambat; print(sambat.__version__)"
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version and platform
+      placeholder: CPython 3.14.0 on Ubuntu 24.04
+    validations:
+      required: true

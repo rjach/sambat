@@ -1,0 +1,7 @@
+# Every change needs a maintainer review; calendar data and release
+# infrastructure are listed explicitly so the rule survives future additions.
+*                       @rjach
+/data/                  @rjach
+/src/sambat/_table.py   @rjach
+/tools/build_table.py   @rjach
+/.github/               @rjach

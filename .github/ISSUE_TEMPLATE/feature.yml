@@ -1,0 +1,33 @@
+name: Feature request
+description: Suggest an addition to sambat.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        sambat only ships features that are **exactly right by construction**
+        (see https://rjach.github.io/sambat/explanation/scope.html). Approximate
+        models, projections, holidays and other policy-dependent data are out of
+        scope.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do, and why is it hard today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API
+      description: How would the feature look? If it mirrors the standard library, which API?
+      render: python
+    validations:
+      required: true
+  - type: textarea
+    id: exactness
+    attributes:
+      label: Why is the result exact?
+      description: Explain why the feature never needs approximations or regularly updated data.
+    validations:
+      required: true

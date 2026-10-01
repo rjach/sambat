@@ -1,0 +1,29 @@
+name: New calendar year
+description: The official calendar for a new BS year has been published.
+title: "Add BS <year> to the calendar table"
+labels: [calendar-data]
+body:
+  - type: input
+    id: year
+    attributes:
+      label: BS year
+      placeholder: "2084"
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Official source
+      description: Link to the published panchang (for example on https://npns.gov.np).
+    validations:
+      required: true
+  - type: textarea
+    id: months
+    attributes:
+      label: Month lengths
+      description: The number of days in each month, Baishakh to Chaitra, and the Gregorian date of Baisakh 1.
+      placeholder: |
+        Baisakh 1 = 2027-04-14 (Wednesday)
+        31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30
+    validations:
+      required: true

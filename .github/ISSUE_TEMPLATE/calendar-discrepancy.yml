@@ -1,0 +1,42 @@
+name: Calendar discrepancy
+description: A BS date converts differently from a published Nepali calendar.
+labels: [calendar-data]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        sambat's month lengths come from `data/calendar.csv`. Every change to
+        that table needs a **published source** (the national panchang from
+        <https://npns.gov.np> or another printed panchang), so please include one.
+  - type: input
+    id: bs-date
+    attributes:
+      label: BS date
+      placeholder: 2081-03-31
+    validations:
+      required: true
+  - type: input
+    id: sambat-ad
+    attributes:
+      label: Gregorian date according to sambat
+      placeholder: 2024-07-15
+    validations:
+      required: true
+  - type: input
+    id: published-ad
+    attributes:
+      label: Gregorian date according to the published calendar
+      placeholder: 2024-07-16
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: Title, publisher, year and a link (or a photo of the page) of the published calendar.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
