@@ -1,0 +1,327 @@
+[build-system]
+requires = ["hatchling>=1.27", "hatch-vcs>=0.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sambat"
+dynamic = ["version"]
+description = "Exact Bikram Sambat (Nepali calendar) dates with the full datetime API"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.11"
+authors = [{ name = "Rojan Acharya", email = "rojanacharya404@gmail.com" }]
+maintainers = [{ name = "Rojan Acharya", email = "rojanacharya404@gmail.com" }]
+keywords = [
+  "bikram-sambat",
+  "bs",
+  "calendar",
+  "date",
+  "datetime",
+  "nepal",
+  "nepali",
+  "nepali-calendar",
+  "nepali-date",
+  "vikram-samvat",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Natural Language :: Nepali",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
+  "Programming Language :: Python :: Free Threading :: 3 - Stable",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Software Development :: Internationalization",
+  "Topic :: Software Development :: Localization",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.scripts]
+sambat = "sambat.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/rjach/sambat"
+Documentation = "https://rjach.github.io/sambat/"
+Source = "https://github.com/rjach/sambat"
+Issues = "https://github.com/rjach/sambat/issues"
+Changelog = "https://rjach.github.io/sambat/changelog.html"
+
+[dependency-groups]
+test = [
+  "coverage[toml]>=7.6",
+  "hypothesis>=6.100",
+  "pytest>=8.3",
+  "pytest-cov>=6.0",
+  "tzdata>=2024.1",
+]
+typing = [
+  "mypy>=1.13",
+  "pyright>=1.1.390",
+  { include-group = "test" },
+]
+lint = [
+  "import-linter>=2.1",
+  "ruff>=0.8",
+]
+docs = [
+  "furo>=2024.8.6; python_version >= '3.12'",
+  "myst-parser>=4.0; python_version >= '3.12'",
+  "sphinx>=8.1; python_version >= '3.12'",
+  "sphinx-copybutton>=0.5.2; python_version >= '3.12'",
+  "sphinxext-opengraph>=0.9.1; python_version >= '3.12'",
+  "sybil>=8.0",
+  { include-group = "test" },
+]
+bench = [
+  "pytest>=8.3",
+  "pytest-benchmark>=5.1",
+]
+release = [
+  "towncrier>=24.8",
+  "twine>=6.0",
+]
+dev = [
+  "nox>=2024.10.9",
+  "pre-commit>=4.0",
+  { include-group = "bench" },
+  { include-group = "docs" },
+  { include-group = "lint" },
+  { include-group = "release" },
+  { include-group = "typing" },
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.hatch.version]
+source = "vcs"
+raw-options = { local_scheme = "no-local-version" }
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/sambat/_version.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/data",
+  "/tools",
+  "/docs",
+  "/changelog.d",
+  "/CHANGELOG.md",
+  "/CONTRIBUTING.md",
+  "/README.md",
+  "/LICENSE",
+  "/NOTICE",
+  "/noxfile.py",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sambat"]
+
+# --------------------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = [
+  "-ra",
+  "--strict-config",
+  "--strict-markers",
+  "--import-mode=importlib",
+]
+filterwarnings = ["error"]
+xfail_strict = true
+
+# --------------------------------------------------------------------------- coverage
+[tool.coverage.run]
+branch = true
+source = ["sambat"]
+omit = ["*/sambat/_version.py"]
+
+[tool.coverage.paths]
+source = ["src/sambat", "*/site-packages/sambat"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 95
+exclude_also = [
+  "if TYPE_CHECKING:",
+  "if __name__ == .__main__.:",
+  "@overload",
+  "raise NotImplementedError",
+]
+
+# --------------------------------------------------------------------------- ruff
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests", "tools"]
+extend-exclude = ["src/sambat/_table.py", "src/sambat/_version.py"]
+
+[tool.ruff.lint]
+select = [
+  "A",    # builtins shadowing
+  "B",    # bugbear
+  "C4",   # comprehensions
+  "D",    # docstrings
+  "E",    # pycodestyle errors
+  "F",    # pyflakes
+  "FBT",  # boolean traps
+  "I",    # isort
+  "ISC",  # implicit string concatenation
+  "N",    # naming
+  "PERF", # performance
+  "PIE",
+  "PL",   # pylint
+  "PT",   # pytest style
+  "PTH",  # pathlib
+  "RET",
+  "RUF",
+  "S",    # bandit
+  "SIM",
+  "T20",  # print
+  "UP",   # pyupgrade
+  "W",
+]
+ignore = [
+  "A005",    # sambat.calendar / sambat.locale intentionally mirror stdlib module names
+  "D105",    # magic methods are documented by the data model
+  "D107",    # __init__ documented on the class
+  "N801",    # `date` / `datetime` mirror the stdlib lowercase class names
+  "PLR0911", # parsers return early from many branches
+  "PLR0912",
+  "PLR0913", # constructors mirror stdlib signatures
+  "PLR0915",
+  "PLR0917", # positional parameters mirror the stdlib datetime signatures
+  "PLR2004", # calendar constants (12 months, 7 days) read better inline
+]
+# Devanagari digits and en dashes are intentional in names, docs and output.
+allowed-confusables = ["०", "–"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "S101", "S301", "S603", "PLC0415", "PLR0124", "PLR2004", "FBT", "N", "T20"]
+"benchmarks/**" = ["D", "S101", "T20"]
+"tools/**" = ["T20", "S603", "S607"]
+"docs/**" = ["D", "INP001"]
+"noxfile.py" = ["D"]
+"src/sambat/__main__.py" = ["T20"]
+"src/sambat/calendar.py" = ["T20"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = ["sambat"]
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# --------------------------------------------------------------------------- typing
+[tool.mypy]
+python_version = "3.11"
+strict = true
+# Runtime type checks mirror the stdlib's validation of untyped callers, so
+# "unreachable" code after isinstance() guards is intentional.
+enable_error_code = ["ignore-without-code", "truthy-bool"]
+files = ["src/sambat", "tools"]
+
+[tool.pyright]
+include = ["src/sambat"]
+pythonVersion = "3.11"
+typeCheckingMode = "strict"
+# Runtime isinstance() checks deliberately validate untyped callers.
+reportUnnecessaryIsInstance = false
+
+# --------------------------------------------------------------------------- layering
+[tool.importlinter]
+root_package = "sambat"
+
+[[tool.importlinter.contracts]]
+name = "The calendar core never imports the public API"
+type = "forbidden"
+source_modules = ["sambat._lookup", "sambat._table"]
+forbidden_modules = [
+  "sambat._date",
+  "sambat._datetime",
+  "sambat.calendar",
+  "sambat.delta",
+  "sambat.periods",
+  "sambat.fiscal",
+]
+
+[[tool.importlinter.contracts]]
+name = "Layers"
+type = "layers"
+layers = [
+  "sambat.__main__",
+  "sambat.compat",
+  "sambat.fiscal",
+  "sambat.periods",
+  "sambat.calendar | sambat.delta",
+  "sambat._datetime",
+  "sambat._date",
+  "sambat._parsing | sambat._formatting | sambat._isoformat",
+  "sambat.locale | sambat._tz",
+  "sambat.text",
+  "sambat._lookup",
+  "sambat._table",
+]
+
+# --------------------------------------------------------------------------- towncrier
+[tool.towncrier]
+directory = "changelog.d"
+filename = "CHANGELOG.md"
+start_string = "<!-- towncrier release notes start -->\n"
+underlines = ["", "", ""]
+title_format = "## [{version}](https://github.com/rjach/sambat/tree/v{version}) - {project_date}"
+issue_format = "[#{issue}](https://github.com/rjach/sambat/issues/{issue})"
+
+[[tool.towncrier.type]]
+directory = "calendar"
+name = "Calendar data"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "deprecation"
+name = "Deprecations"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "feature"
+name = "Features"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "bugfix"
+name = "Bug fixes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "doc"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "misc"
+name = "Miscellaneous"
+showcontent = false
