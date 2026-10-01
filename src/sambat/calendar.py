@@ -745,6 +745,13 @@ def timegm(tuple: Sequence[int]) -> int:  # noqa: A002
     return ((days * 24 + hour) * 60 + minute) * 60 + second
 
 
+def _locale_argument(name: str) -> Locale:
+    try:
+        return get_locale(name)
+    except LookupError as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from None
+
+
 def main(args: Sequence[str] | None = None) -> int:
     """Run the ``python -m sambat.calendar`` command line interface.
 
@@ -760,7 +767,9 @@ def main(args: Sequence[str] | None = None) -> int:
     parser.add_argument("year", nargs="?", type=int, help="BS year (default: this year)")
     parser.add_argument("month", nargs="?", type=int, help="BS month number, 1-12")
     parser.add_argument("-t", "--type", choices=("text", "html"), default="text")
-    parser.add_argument("-L", "--locale", default="en", help="en or ne (default: en)")
+    parser.add_argument(
+        "-L", "--locale", type=_locale_argument, default=EN, help="en or ne (default: en)"
+    )
     parser.add_argument(
         "-f", "--first-weekday", type=int, default=None, help="0=Monday .. 6=Sunday"
     )
@@ -771,10 +780,7 @@ def main(args: Sequence[str] | None = None) -> int:
     parser.add_argument("-m", "--months", type=int, default=3, help="months per row")
     options = parser.parse_args(args)
 
-    try:
-        locale = get_locale(options.locale)
-    except LookupError as exc:
-        parser.error(str(exc))
+    locale: Locale = options.locale
     default_first = SUNDAY if options.dual else MONDAY
     first = default_first if options.first_weekday is None else options.first_weekday
     if not MONDAY <= first <= SUNDAY:

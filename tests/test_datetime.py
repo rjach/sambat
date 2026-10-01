@@ -178,7 +178,7 @@ def test_comparisons_naive_and_aware() -> None:
         _ = naive < a
     assert naive > datetime(2083, 6, 15)
     assert datetime(2083, 6, 15) < naive
-    assert naive >= naive
+    assert naive >= datetime(2083, 6, 15, 9, 30)
 
 
 def test_no_comparison_with_stdlib_datetime() -> None:
